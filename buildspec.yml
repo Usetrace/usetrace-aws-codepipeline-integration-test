@@ -1,0 +1,45 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - apk add --no-cache jq  # Install jq for JSON processing
+
+  pre_build:
+    # Logic for including templates would be implemented here
+    commands:
+      - echo "Magic required here"
+
+  build:
+    commands:
+      # Trigger single trace job (replace with actual commands)
+      - echo "Trigger single trace job"
+      
+      # Trigger entire project job (replace with actual commands)
+      - echo "Trigger project trace job. Can we use conditionals?"
+
+      # Process single trace artifact as we did with gitlab
+      - |
+        cat output.json | jq '.status'
+        cat output.json
+
+      # Process entire project results
+      - |
+        cat output.json | jq '.report.failures'
+        if [ $(jq '.report.failures | length' output.json) -eq 0 ]; then
+          exit 0
+        else
+          exit 1
+        fi
+
+  post_build:
+    # Conditional actions based on exit code
+    commands:
+      - echo "All traces passed!"  # Success message (exit code 0)
+      - |
+          if [ $? -eq 0 ]; then
+            # Need to find equivalent output message here.
+            - echo "You are lucky!"
+          else
+            echo "No good news... Taking appropriate actions..."
+          fi
