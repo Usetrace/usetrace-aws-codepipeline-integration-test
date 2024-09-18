@@ -3,7 +3,7 @@ version: 0.2
 phases:
   install:
     commands:
-      - apt-get update -qq && apt-get install -y -qq jq  # Install jq for JSON processing
+      - yum install jq  # Install jq for JSON processing
 
   pre_build:
     # Logic for including templates would be implemented here
