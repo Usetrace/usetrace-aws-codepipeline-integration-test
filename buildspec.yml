@@ -3,7 +3,7 @@ version: 0.2
 phases:
   install:
     commands:
-      - apk add --no-cache jq  # Install jq for JSON processing
+      - apt-get update -qq && apt-get install -y -qq jq  # Install jq for JSON processing
 
   pre_build:
     # Logic for including templates would be implemented here
@@ -15,7 +15,7 @@ phases:
       # Trigger single trace job (replace with actual commands)
       - echo "Trigger single trace job"
       
-      # Trigger entire project job (replace with actual commands)
+      # Trigger the entire project job (replace with actual commands)
       - echo "Trigger project trace job. Can we use conditionals?"
 
       # Process single trace artifact as we did with gitlab
