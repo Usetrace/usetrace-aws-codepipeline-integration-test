@@ -19,6 +19,8 @@ phases:
       - echo "Trigger project trace job. Can we use conditionals?"
       - git clone https://github.com/Usetrace/universal-integration.git
       - ls
+      - export INPUT_TRACE_ID=ZuBrNuWNsQAXLYUzSDO9O9Gx9SguaVsr
+      - npm run trace --prefix universal-integration
       # Process single trace artifact as we did with gitlab
       - |
         cat output.json | jq '.status'
