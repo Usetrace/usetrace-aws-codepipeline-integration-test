@@ -17,7 +17,8 @@ phases:
       
       # Trigger the entire project job (replace with actual commands)
       - echo "Trigger project trace job. Can we use conditionals?"
-
+      - git clone https://github.com/Usetrace/universal-integration.git
+      - ls
       # Process single trace artifact as we did with gitlab
       - |
         cat output.json | jq '.status'
