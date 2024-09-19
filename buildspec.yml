@@ -5,7 +5,7 @@ phases:
     commands:
       # - yum install jq  # Install jq for JSON processing
       # jp seems to be already installed
-      - echo "phase: install"
+      - echo "phase install"
 
   pre_build:
     # Logic for including templates would be implemented here
