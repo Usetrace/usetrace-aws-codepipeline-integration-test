@@ -23,9 +23,10 @@ phases:
       - npm install --prefix universal-integration
       - ls
       # You can set some values by env vars directly
-      - export INPUT_TRACE_ID=Zux6zjrzOwAYPAJK_cLMvZ3_xVspdHDW
+      - export INPUT_BUILD_TIMEOUT_SECONDS=10
+      - export INPUT_FAIL_ON_FAILED_TRACES=false
       # Parameters can be passed by the command line too. These has precedence over env var ones
-      - npm run usetrace -- --traceId yourTraceId --browsers chrome,firefox --buildTimeoutSeconds 900 --webhookUrl https://webhook-test.com/yourWebhookId --parameters '"key1":"value1", "key2":"value2"' --prefix universal-integration
+      - npm run usetrace -- --traceId Zux6zjrzOwAYPAJK_cLMvZ3_xVspdHDW --browsers chrome,firefox --buildTimeoutSeconds 900 --webhookUrl https://webhook-test.com/yourWebhookId --parameters '"key1":"value1", "key2":"value2"' --prefix universal-integration
       - ls
       # Process single trace artifact
       - |
