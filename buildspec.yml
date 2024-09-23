@@ -1,16 +1,12 @@
 version: 0.2
 
 phases:
-  install:
-    # Getting the integration code from usetrace universal-integration repository
-    commands:
-      - git clone https://github.com/usetrace/universal-integration.git
-      - npm install --prefix universal-integration
-  
   build:
     commands:
       # Trigger single trace job (replace with actual commands)
       - echo "Trigger single trace job"
+      - git clone https://github.com/usetrace/universal-integration.git
+      - npm install --prefix universal-integration 
       
       # Passing some parameters as env vars
       - export INPUT_BUILD_TIMEOUT_SECONDS=900
