@@ -2,32 +2,31 @@ version: 0.2
 
 phases:
   install:
+    # Getting the integration code from usetrace universal-integration repository
     commands:
-      # - yum install jq  # Install jq for JSON processing
-      # jp seems to be already installed
-      - echo "phase install"
-
-  pre_build:
-    # Logic for including templates would be implemented here
-    commands:
-      - echo "Magic required here"
-
+      - git clone https://github.com/usetrace/universal-integration.git
+      - npm install --prefix universal-integration
+  
   build:
     commands:
       # Trigger single trace job (replace with actual commands)
       - echo "Trigger single trace job"
       
-      # Trigger the entire project job (replace with actual commands)
-      - echo "Trigger project trace job. Can we use conditionals?"
-      - git clone https://github.com/usetrace/universal-integration.git
-      - npm install --prefix universal-integration
-      - ls
-      # You can set some values by env vars directly
-      - export INPUT_BUILD_TIMEOUT_SECONDS=10
+      # Passing some parameters as env vars
+      - export INPUT_BUILD_TIMEOUT_SECONDS=900
       - export INPUT_FAIL_ON_FAILED_TRACES=false
+      
       # Parameters can be passed by the command line too. These has precedence over env var ones
-      - npm run usetrace -- --traceId Zux6zjrzOwAYPAJK_cLMvZ3_xVspdHDW --browsers chrome,firefox --buildTimeoutSeconds 900 --webhookUrl https://webhook-test.com/yourWebhookId --parameters '"key1":"value1", "key2":"value2"' --prefix universal-integration
-      - ls
+      - npm run usetrace -- --traceId {Trace Id} --browsers chrome,firefox --prefix universal-integration
+
+      # Process entire project results
+      - |
+        if [ $(jq '.report.failures | length' output.json) -eq 0 ]; then
+          echo "Everything was good"
+        else
+          echo "Something is not right. Perform corrective actions here"
+        fi
+
       # Process single trace artifact
       - |
         cat output.json | jq '.status'
