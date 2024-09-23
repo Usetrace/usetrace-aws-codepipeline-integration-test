@@ -6,22 +6,14 @@ phases:
       # Trigger single trace job (replace with actual commands)
       - echo "Trigger single trace job"
       - git clone https://github.com/usetrace/universal-integration.git
-      - npm install --prefix universal-integration 
+      - npm install --prefix universal-integration
       
       # Passing some parameters as env vars
       - export INPUT_BUILD_TIMEOUT_SECONDS=900
       - export INPUT_FAIL_ON_FAILED_TRACES=false
       
-      # Parameters can be passed by the command line too. These has precedence over env var ones
-      - npm run usetrace -- --traceId {Trace Id} --browsers chrome,firefox --prefix universal-integration
-
-      # Process entire project results
-      - |
-        if [ $(jq '.report.failures | length' output.json) -eq 0 ]; then
-          echo "Everything was good"
-        else
-          echo "Something is not right. Perform corrective actions here"
-        fi
+      # Parameters can be passed by the command line too. These have precedence over env var ones
+      - npm run usetrace --prefix universal-integration -- --traceId Zux6zjrzOwAYPAJK_cLMvZ3_xVspdHDW --browsers chrome,firefox 
 
       # Process single trace artifact
       - |
